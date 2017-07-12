@@ -17,11 +17,8 @@ passport.use(new FacebookStrategy({
     callbackURL: "http://localhost:3000/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({ facebookId: profile.id }, function (err, profile) {
-      return done(err, profile);
-    });
-  }
-));
+      return done(null, profile);
+    }));
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
